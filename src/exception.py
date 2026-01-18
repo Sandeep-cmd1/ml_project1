@@ -1,5 +1,7 @@
 import sys
-import logging
+from logger import logger
+
+logger.info("Works everywhere")
 
 #Function to customize exception message for exceptions raised by sys
 def error_message_detail(error,error_detail:sys):

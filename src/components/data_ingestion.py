@@ -2,10 +2,13 @@ import os
 import sys
 from src.exception import CustomException
 from src.logger import logging
+from src.utils import train_test_split_function
+from src.components.data_transformation import DataTransformation, DataTransformationConfig
 import pandas as pd
 
-from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+
+logging.info("ENTERED 'data ingestion code'")
 
 #Use dataclass decorator to set variables (I/P or O/P related items/ config)
 @dataclass
@@ -26,13 +29,13 @@ class DataIngestion:
             logging.info("Dataset read as Dataframe")
 
             logging.info("Started train test split of dataframe")
-            train_set,test_Set = train_test_split(df,test_size=0.2,random_state=42)
+            train_set,test_set = train_test_split_function(df)
             logging.info("Train test split of dataframe completed")
 
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
             train_set.to_csv(self.ingestion_config.train_data_path,index=False,header=True)
-            test_Set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
+            test_set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
 
             logging.info("End of Data ingestion method/function")
             return (
@@ -45,6 +48,9 @@ class DataIngestion:
 
 #Let's initiate above classes by calling them:
 if __name__=="__main__":
-    obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    data_ingestion_obj = DataIngestion()
+    train_path,test_path = data_ingestion_obj.initiate_data_ingestion()
+    data_transform_obj = DataTransformation()
+    data_transform_obj.initiate_data_transformation(train_path,test_path)
 
+logging.info("EXITING 'data ingestion code'")

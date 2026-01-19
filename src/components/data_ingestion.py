@@ -1,12 +1,15 @@
 import os
 import sys
+from dataclasses import dataclass
+
+import pandas as pd
+
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import train_test_split_function
-from src.components.data_transformation import DataTransformation, DataTransformationConfig
-import pandas as pd
+from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 
-from dataclasses import dataclass
 
 logging.info("ENTERED 'data ingestion code'")
 
@@ -51,6 +54,9 @@ if __name__=="__main__":
     data_ingestion_obj = DataIngestion()
     train_path,test_path = data_ingestion_obj.initiate_data_ingestion()
     data_transform_obj = DataTransformation()
-    data_transform_obj.initiate_data_transformation(train_path,test_path)
+    train_array,test_array = data_transform_obj.initiate_data_transformation(train_path,test_path)
+    model_trainer_obj = ModelTrainer()
+    print(model_trainer_obj.initiate_model_trainer(train_array,test_array))
+
 
 logging.info("EXITING 'data ingestion code'")

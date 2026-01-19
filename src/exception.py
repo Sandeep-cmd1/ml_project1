@@ -1,7 +1,7 @@
 import sys
-from logger import logger
+from src.logger import logging
 
-logger.info("Works everywhere")
+logging.info("this is error exception code")
 
 #Function to customize exception message for exceptions raised by sys
 def error_message_detail(error,error_detail:sys):

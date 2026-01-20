@@ -51,10 +51,16 @@ class DataIngestion:
 
 #Let's initiate above classes by calling them:
 if __name__=="__main__":
+    
+    #Data ingestion
     data_ingestion_obj = DataIngestion()
     train_path,test_path = data_ingestion_obj.initiate_data_ingestion()
+
+    #Data transformation
     data_transform_obj = DataTransformation()
     train_array,test_array = data_transform_obj.initiate_data_transformation(train_path,test_path)
+
+    #Model training
     model_trainer_obj = ModelTrainer()
     print(model_trainer_obj.initiate_model_trainer(train_array,test_array))
 

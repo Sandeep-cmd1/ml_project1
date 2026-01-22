@@ -1,6 +1,7 @@
 import os
 import sys
 import dill
+import pickle
 
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import r2_score
@@ -27,6 +28,15 @@ def save_object(file_path,obj):
             dill.dump(obj,file_obj)
     except Exception as e:
         raise CustomException(e,sys)
+    
+
+def load_object(file_path):
+    try:
+        with open(file_path,"rb") as obj:
+            return dill.load(obj)
+    except Exception as e:
+        raise CustomException(e,sys)
+
 
 def evaluate_model(X_train,y_train,X_test,y_test,models,params):
     try:

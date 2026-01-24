@@ -1,7 +1,7 @@
 pandas
 numpy
 seaborn
-ipynb
+#ipynb
 matplotlib
 scikit-learn
 catboost

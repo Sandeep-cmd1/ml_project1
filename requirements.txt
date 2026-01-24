@@ -7,3 +7,4 @@ xgboost
 catboost
 matplotlib
 seaborn
+ipynb

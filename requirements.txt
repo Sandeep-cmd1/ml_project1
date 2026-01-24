@@ -6,3 +6,4 @@ flask
 xgboost
 catboost
 matplotlib
+seaborn

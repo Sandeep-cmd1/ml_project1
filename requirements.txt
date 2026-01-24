@@ -5,3 +5,4 @@ dill
 flask
 xgboost
 catboost
+matplotlib
